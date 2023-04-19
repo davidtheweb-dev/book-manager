@@ -112,8 +112,13 @@ export default {
       <main class="main">
         <BookList :books="books"></BookList>
       </main>
-      <ModalLayer v-if="showModal" title="Add new book">
-        <BookForm></BookForm>
+      <ModalLayer v-if="showModal">
+        <template #header>
+          <h1>Add a new book</h1>
+        </template>
+        <template #body>
+          <BookForm></BookForm>
+        </template>
       </ModalLayer>
     </section>
   </div>

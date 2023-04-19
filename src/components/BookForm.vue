@@ -63,8 +63,7 @@ export default {
         <label for="cover">Image</label>
         <input id="cover" type="url" required />
       </div>
-
-      <div class="book-form__submit">
+      <div class="book-form__form-group">
         <button class="book-form__submit" type="submit">Add book</button>
       </div>
     </form>
