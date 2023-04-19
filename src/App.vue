@@ -23,7 +23,7 @@ export default {
           author: 'J.R.R. Tolkien',
           year: 1954,
           pages: 1216,
-          cover: '',
+          cover: 'https://m.media-amazon.com/images/I/71VjmMcE-rL.jpg',
           genre: 'Fantasy',
           description:
             'The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien.',
@@ -42,7 +42,7 @@ export default {
           author: 'J.K Rowling',
           year: 1997,
           pages: 223,
-          cover: '',
+          cover: 'https://m.media-amazon.com/images/I/81m1s4wIPML.jpg',
           genre: 'Fantasy',
           description:
           'Harry Potter and the Philosopher\'s Stone is a fantasy novel written by British author J. K. Rowling.',
@@ -61,7 +61,7 @@ export default {
           author: 'J.K Rowling',
           year: 1997,
           pages: 223,
-          cover: '',
+          cover: 'https://m.media-amazon.com/images/I/81m1s4wIPML.jpg',
           genre: 'Fantasy',
           description:
           'Harry Potter and the Philosopher\'s Stone is a fantasy novel written by British author J. K. Rowling.',
@@ -80,7 +80,7 @@ export default {
           author: 'J.R.R. Tolkien',
           year: 1954,
           pages: 1216,
-          cover: '',
+          cover: 'https://m.media-amazon.com/images/I/71VjmMcE-rL.jpg',
           genre: 'Fantasy',
           description:
             'The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien.',
