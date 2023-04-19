@@ -3,7 +3,7 @@ export default {
   name: 'BookItem',
   props: {
     book: {
-      type: Object,
+      type: Array,
       required: true,
     },
   },
