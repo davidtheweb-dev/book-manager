@@ -9,6 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "uuidv4": "^6.2.13",
     "vue": "^3.2.47"
   },
   "devDependencies": {
