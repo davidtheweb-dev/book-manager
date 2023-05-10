@@ -16,6 +16,7 @@ export default {
   },
   data() {
     return {
+      showModal: false,
       books: [
         {
           id: 1,
@@ -38,14 +39,14 @@ export default {
         },
         {
           id: 2,
-          title: 'Harry Potter and the Philosopher\'s Stone',
+          title: "Harry Potter and the Philosopher's Stone",
           author: 'J.K Rowling',
           year: 1997,
           pages: 223,
           cover: 'https://m.media-amazon.com/images/I/81m1s4wIPML.jpg',
           genre: 'Fantasy',
           description:
-          'Harry Potter and the Philosopher\'s Stone is a fantasy novel written by British author J. K. Rowling.',
+            "Harry Potter and the Philosopher's Stone is a fantasy novel written by British author J. K. Rowling.",
           editorial: 'Bloomsbury',
           language: 'English',
           isbn: '978-0-7475-3269-9',
@@ -57,14 +58,14 @@ export default {
         },
         {
           id: 3,
-          title: 'Harry Potter and the Philosopher\'s Stone',
+          title: "Harry Potter and the Philosopher's Stone",
           author: 'J.K Rowling',
           year: 1997,
           pages: 223,
           cover: 'https://m.media-amazon.com/images/I/81m1s4wIPML.jpg',
           genre: 'Fantasy',
           description:
-          'Harry Potter and the Philosopher\'s Stone is a fantasy novel written by British author J. K. Rowling.',
+            "Harry Potter and the Philosopher's Stone is a fantasy novel written by British author J. K. Rowling.",
           editorial: 'Bloomsbury',
           language: 'English',
           isbn: '978-0-7475-3269-9',
@@ -94,34 +95,31 @@ export default {
           personalNote: '',
         },
       ],
-      showModal: false,
     };
   },
 };
 </script>
 
 <template>
-  <div>
-    <section class="header">
-      <img class="logo" src="./assets/uoc-logo.png" alt="Logo" />
+  <header class="header">
+    <div class="header__left">
+      <img class="logo" src="./assets/uoc-logo.png" alt="UOC logo" />
       <h1 class="title">Book manager</h1>
-    </section>
-    <section class="content">
-      <SearchBar></SearchBar>
-      <FilterBar></FilterBar>
-      <main class="main">
-        <BookList :books="books"></BookList>
-      </main>
-      <ModalLayer v-if="showModal">
-        <template #header>
-          <h1>Add a new book</h1>
-        </template>
-        <template #body>
-          <BookForm></BookForm>
-        </template>
-      </ModalLayer>
-    </section>
-  </div>
+    </div>
+  </header>
+  <SearchBar />
+  <FilterBar />
+  <main class="main">
+    <BookList :books="books" />
+  </main>
+  <ModalLayer v-if="showModal">
+    <template #header>
+      <h2>Add a new book</h2>
+    </template>
+    <template #body>
+      <BookForm />
+    </template>
+  </ModalLayer>
 </template>
 
 <style>
