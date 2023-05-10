@@ -1,14 +1,36 @@
 <script>
 export default {
   name: 'SearchBar',
+  data() {
+    return {
+      searchTerm: '',
+    };
+  },
+  methods: {
+    showForm() {
+      this.$emit('show-form');
+    },
+    clearSearch() {
+      this.searchTerm = '';
+      this.$emit('search', '');
+    },
+    searchBook() {
+      this.$emit('search', this.searchTerm);
+    },
+  },
 };
 </script>
 
 <template>
   <div class="search-bar">
-    <input type="text" placeholder="Search book" />
-    <button type="button" class="clear">Clear</button>
-    <button type="button" class="add">Add book</button>
+    <input
+      type="text"
+      placeholder="Search book"
+      @input="searchBook"
+      v-model="searchTerm"
+    />
+    <button type="button" class="clear" @click="clearSearch">Clear</button>
+    <button type="button" class="add" @click="showForm">Add book</button>
   </div>
 </template>
 
