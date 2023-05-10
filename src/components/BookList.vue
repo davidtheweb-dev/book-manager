@@ -17,12 +17,12 @@ export default {
 
 <template>
   <div class="book-list">
-    <BookItem v-for="book in books" :key="book.id" :book="book"></BookItem>
+    <BookItem v-for="book in books" :key="book.id" :book="book" />
   </div>
 </template>
 
 <style scoped>
-book-list {
+.book-list {
   padding: 20px;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
