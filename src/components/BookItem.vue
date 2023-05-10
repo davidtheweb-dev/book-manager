@@ -7,12 +7,17 @@ export default {
       required: true,
     },
   },
+  methods: {
+    deleteBook(id) {
+      this.$emit('delete-book', id);
+    },
+  },
 };
 </script>
 
 <template>
   <div :class="['book-item', { 'book-item--favourite': book.favourite }]">
-    <button class="book-item__delete">
+    <button class="book-item__delete" @click="deleteBook(book.id)">
       <img src="./../assets/delete-button.svg" alt="Delete book" />
     </button>
     <div class="book-item__cover">
