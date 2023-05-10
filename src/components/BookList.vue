@@ -12,12 +12,22 @@ export default {
       required: true,
     },
   },
+  methods: {
+    deleteBook(id) {
+      this.$emit('delete-book', id);
+    },
+  },
 };
 </script>
 
 <template>
   <div class="book-list">
-    <BookItem v-for="book in books" :key="book.id" :book="book" />
+    <BookItem
+      v-for="book in books"
+      :key="book.id"
+      :book="book"
+      @delete-book="deleteBook"
+    />
   </div>
 </template>
 
