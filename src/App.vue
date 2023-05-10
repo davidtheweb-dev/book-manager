@@ -17,7 +17,11 @@ export default {
   data() {
     return {
       showModal: false,
-      books: [
+      searchTerm: '',
+      sortBy: 'title',
+      orderBy: 'asc',
+      favouriteItems: false,
+      bookList: [
         {
           id: 1,
           title: 'The Lord of the Rings',
@@ -97,6 +101,56 @@ export default {
       ],
     };
   },
+  methods: {
+    addBook(book) {
+      this.bookList.push(book);
+      this.toggleForm();
+    },
+    deleteBook(bookId) {
+      this.bookList = this.bookList.filter((book) => book.id !== bookId);
+    },
+    toggleForm() {
+      this.showModal = !this.showModal;
+    },
+    setSearchTerm(searchTerm) {
+      this.searchTerm = searchTerm;
+    },
+    setSortBy(sortBy) {
+      this.sortBy = sortBy;
+    },
+    setOrderBy(orderBy) {
+      this.orderBy = orderBy;
+    },
+    setFavouriteItems(favouriteItems) {
+      this.favouriteItems = favouriteItems;
+    },
+    bookListFiltered() {
+      let filteredBooks = this.books;
+      if (this.searchTerm !== '') {
+        filteredBooks = filteredBooks.filter(
+          (book) =>
+            book.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            book.author.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            book.genre.toLowerCase().includes(this.searchTerm.toLowerCase())
+        );
+      }
+      if (this.sortBy !== '') {
+        filteredBooks = filteredBooks.sort((a, b) => {
+          if (this.orderBy === 'desc') {
+            return b[this.sortBy].localeCompare(a[this.sortBy]);
+          } else {
+            return a[this.sortBy].localeCompare(b[this.sortBy]);
+          }
+        });
+      }
+      if (this.favouriteItems !== '') {
+        filteredBooks = filteredBooks.filter(
+          (book) => book.favourite === this.favouriteItems
+        );
+      }
+      return filteredBooks;
+    },
+  },
 };
 </script>
 
@@ -107,17 +161,21 @@ export default {
       <h1 class="title">Book manager</h1>
     </div>
   </header>
-  <SearchBar />
-  <FilterBar />
+  <SearchBar @search="setSearchTerm" />
+  <FilterBar
+    @sort-items="setSortBy"
+    @order-items="setOrderBy"
+    @favouriteItems="setFavouriteItems"
+  />
   <main class="main">
-    <BookList :books="books" />
+    <BookList :books="bookListFiltered()" @delete-book="deleteBook" />
   </main>
   <ModalLayer v-if="showModal">
     <template #header>
       <h2>Add a new book</h2>
     </template>
     <template #body>
-      <BookForm />
+      <BookForm @add-book="addBook" />
     </template>
   </ModalLayer>
 </template>
