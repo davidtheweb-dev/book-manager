@@ -1,6 +1,23 @@
 <script>
 export default {
   name: 'FilterBar',
+  methods: {
+    sortBy() {
+      const sortSelect = document.getElementById('sort');
+      const sortByValue = sortSelect.options[sortSelect.selectedIndex].value;
+      this.$emit('sort-items', sortByValue);
+    },
+    orderBy() {
+      const orderSelect = document.getElementById('order');
+      const orderByValue = orderSelect.options[orderSelect.selectedIndex].value;
+      this.$emit('order-items', orderByValue);
+    },
+    favourite() {
+      const favouriteCheckbox = document.getElementById('favourites');
+      const favouriteValue = favouriteCheckbox.checked;
+      this.$emit('favourite-items', favouriteValue);
+    },
+  },
 };
 </script>
 
@@ -8,7 +25,7 @@ export default {
   <div class="filter-bar">
     <div class="filter-bar__select">
       <label for="sort">Sort by:</label>
-      <select id="sort">
+      <select id="sort" @change="sortBy">
         <option value="title">Title</option>
         <option value="author">Author</option>
         <option value="year">Year</option>
@@ -25,13 +42,13 @@ export default {
     </div>
     <div class="filter-bar__select">
       <label for="order">Sort by:</label>
-      <select id="order">
+      <select id="order" @change="orderBy">
         <option value="ascending">Ascending</option>
         <option value="descending">Descending</option>
       </select>
     </div>
     <div class="filter-bar__check">
-      <input type="checkbox" id="favourites" />
+      <input type="checkbox" id="favourites" @change="favourite" />
       <label for="favourites">Favourite</label>
     </div>
   </div>
