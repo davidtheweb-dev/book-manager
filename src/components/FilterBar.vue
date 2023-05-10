@@ -12,7 +12,15 @@ export default {
         <option value="title">Title</option>
         <option value="author">Author</option>
         <option value="year">Year</option>
-        <option value="year">Rating</option>
+        <option value="pages">Pages</option>
+        <option value="genre">Genre</option>
+        <option value="editorial">Editorial</option>
+        <option value="language">Language</option>
+        <option value="isbn">ISBN</option>
+        <option value="price">Price</option>
+        <option value="stock">Stock</option>
+        <option value="favorite">Favorite</option>
+        <option value="rating">Rating</option>
       </select>
     </div>
     <div class="filter-bar__select">
