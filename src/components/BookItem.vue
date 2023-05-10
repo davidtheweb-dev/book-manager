@@ -22,20 +22,29 @@ export default {
       <h2 class="book-item__title">{{ book.title }}</h2>
       <p class="book-item__author">{{ book.author }}</p>
       <div class="book-item__data">
-        <p class="book-item__parameterYear">{{ book.year }}</p>
-        <p class="book-item__parameterPages">{{ book.pages }}</p>
-        <p class="book-item__parameterGenre">{{ book.genre }}</p>
-        <p class="book-item__parameterEditorial">{{ book.editorial }}</p>
-        <p class="book-item__parameterLanguage">{{ book.language }}</p>
-        <p class="book-item__parameterISBN">{{ book.isbn }}</p>
+        <p class="book-item__year"><strong>Year: </strong>{{ book.year }}</p>
+        <p class="book-item__pages"><strong>Pages: </strong>{{ book.pages }}</p>
+        <p class="book-item__genre"><strong>Genre: </strong>{{ book.genre }}</p>
+        <p class="book-item__editorial">
+          <strong>Editorial: </strong>{{ book.editorial }}
+        </p>
+        <p class="book-item__language">
+          <strong>Language: </strong>{{ book.language }}
+        </p>
+        <p class="book-item__isbn"><strong>ISBN: </strong>{{ book.isbn }}</p>
       </div>
-      <p class="book-item__description">{{ book.description }}</p>
-      <p class="book-item__personal-note">{{ book.personalNote }}</p>
-      <div class="book-item__extra">
-        <p class="book-item__parameterStock">{{ book.stock }}</p>
-        <p class="book-item__parameterPrice">{{ book.price }}</p>
-        <p class="book-item__parameterRating">{{ book.rating }}</p>
-      </div>
+    </div>
+
+    <p class="book-item__description" v-if="book.description">
+      {{ book.description }}
+    </p>
+
+    <p class="book-item__personal-note">{{ book.personalNote }}</p>
+
+    <div class="book-item__extra">
+      <p class="book-item__price"><strong>Price: </strong>{{ book.price }}</p>
+      <p class="book-item__stock"><strong>Stock: </strong>{{ book.stock }}</p>
+      <p class="book-item__rating">{{ book.rating }}</p>
     </div>
   </div>
 </template>
