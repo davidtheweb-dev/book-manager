@@ -7,8 +7,8 @@ export default {
 <template>
   <div class="search-bar">
     <input type="text" placeholder="Search book" />
-    <button class="clear">Clear</button>
-    <button class="add">Add book</button>
+    <button type="button" class="clear">Clear</button>
+    <button type="button" class="add">Add book</button>
   </div>
 </template>
 
