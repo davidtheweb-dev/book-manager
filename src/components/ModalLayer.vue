@@ -10,7 +10,7 @@ export default {
     <div class="modal__content">
       <div class="modal__header">
         <slot name="header"></slot>
-        <button class="modal__close">
+        <button type="button" class="modal__close">
           <img src="./../assets/close-button.svg" alt="Close" />
         </button>
       </div>
