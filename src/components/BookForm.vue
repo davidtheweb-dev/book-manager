@@ -1,71 +1,61 @@
 <script>
-import { v4 as uuidv4 } from 'uuid';
+import { uuid } from 'vue-uuid';
 
 export default {
   name: 'BookForm',
-  data() {
-    return {
+  data: () => ({
+    book: {
       title: '',
       author: '',
-      year: '',
-      genreInput: '',
       description: '',
+      year: '',
       pages: '',
+      genre: '',
       editorial: '',
       language: '',
       isbn: '',
       price: '',
       stock: '',
-      favourite: '',
+      favourite: false,
       rating: '',
-      image: '',
-      error: false,
-    };
-  },
+      cover: '',
+    },
+  }),
   methods: {
+    resetBook() {
+      this.book = {
+        title: '',
+        author: '',
+        description: '',
+        year: '',
+        pages: '',
+        genre: '',
+        editorial: '',
+        language: '',
+        isbn: '',
+        price: '',
+        stock: '',
+        favourite: false,
+        rating: '',
+        cover: '',
+      };
+    },
+    closeForm() {
+      this.resetBook();
+      this.$emit('close-modal');
+    },
     createBook() {
-      if (!this.title || !this.author || !this.description || !this.year) {
-        this.error = true;
+      if (
+        (this.book.title === '' || this.book.author === '',
+        this.book.description === '')
+      ) {
+        alert('Please fill in the title and author fields');
         return;
       }
-
-      const genres = this.genreInput.split(',').map((genre) => genre.trim());
-
-      const book = {
-        id: uuidv4(),
-        title: this.title,
-        author: this.author,
-        year: parseInt(this.year),
-        pages: parseInt(this.pages),
-        cover: this.image,
-        genre: genres,
-        description: this.description,
-        editorial: this.editorial,
-        language: this.language,
-        isbn: this.isbn,
-        price: this.price,
-        stock: this.stock,
-        favourite: this.favourite,
-        rating: this.rating,
-      };
-
-      this.$emit('add-book', book);
-
-      this.title = '';
-      this.author = '';
-      this.year = '';
-      this.pages = '';
-      this.cover = '';
-      this.genreInput = '';
-      this.description = '';
-      this.editorial = '';
-      this.language = '';
-      this.isbn = '';
-      this.price = '';
-      this.stock = '';
-      this.favourite = '';
-      this.rating = '';
-      this.error = false;
+      this.book.id = uuid.v4();
+      this.book.genre = this.book.genre.split(',');
+      this.$emit('add-book', this.book);
+      this.resetBook();
     },
   },
 };
@@ -76,63 +66,65 @@ export default {
     <form class="book-form__form" @submit.prevent="createBook">
       <div class="book-form__form-group">
         <label for="title">Title</label>
-        <input id="title" type="text" v-model="title" />
+        <input type="text" id="title" v-model="book.title" />
       </div>
       <div class="book-form__form-group">
         <label for="author">Author</label>
-        <input id="author" type="text" v-model="author" />
+        <input type="text" id="author" v-model="book.author" />
       </div>
       <div class="book-form__form-group">
         <label for="description">Description</label>
-        <textarea id="description" v-model="description"></textarea>
+        <textarea id="description" v-model="book.description"></textarea>
       </div>
       <div class="book-form__form-group">
         <label for="year">Year</label>
-        <input id="year" type="number" v-model="year" />
+        <input type="number" id="year" v-model="book.year" />
       </div>
       <div class="book-form__form-group">
         <label for="pages">Pages</label>
-        <input id="pages" type="number" v-model="pages" />
+        <input type="number" id="pages" v-model="book.pages" />
       </div>
       <div class="book-form__form-group">
         <label for="genre">Genre</label>
-        <input id="genre" type="text" v-model="genreInput" />
+        <input type="text" id="genre" v-model="book.genre" />
       </div>
       <div class="book-form__form-group">
         <label for="editorial">Editorial</label>
-        <input id="editorial" type="text" v-model="editorial" />
+        <input type="text" id="editorial" v-model="book.editorial" />
       </div>
       <div class="book-form__form-group">
         <label for="language">Language</label>
-        <select id="language" v-model="language">
-          <option value="">Select a language</option>
-          <option value="Spanish">Spanish</option>
-          <option value="English">English</option>
-          <option value="French">French</option>
-          <option value="Italian">Italian</option>
-          <option value="German">German</option>
+        <select id="language" v-model="book.language">
+          <option value="en">English</option>
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="de">German</option>
+          <option value="it">Italian</option>
+          <option value="pt">Portuguese</option>
+          <option value="ru">Russian</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
         </select>
       </div>
       <div class="book-form__form-group">
         <label for="isbn">ISBN</label>
-        <input id="isbn" type="text" v-model="isbn" />
+        <input type="text" id="isbn" v-model="book.isbn" />
       </div>
       <div class="book-form__form-group">
         <label for="price">Price</label>
-        <input id="price" type="number" v-model="price" />
+        <input type="number" id="price" v-model="book.price" />
       </div>
       <div class="book-form__form-group">
         <label for="stock">Stock</label>
-        <input id="stock" type="number" v-model="stock" />
+        <input type="number" id="stock" v-model="book.stock" />
       </div>
       <div class="book-form__form-group">
         <label for="favourite">Favourite</label>
-        <input id="favourite" type="checkbox" v-model="favourite" />
+        <input type="checkbox" id="favourite" v-model="book.favourite" />
       </div>
       <div class="book-form__form-group">
         <label for="rating">Rating</label>
-        <select id="rating" v-model="rating">
-          <option value="">Select a rating</option>
+        <select id="rating" v-model="book.Rating">
           <option value="1">1 star</option>
           <option value="2">2 stars</option>
           <option value="3">3 stars</option>
@@ -141,14 +133,11 @@ export default {
         </select>
       </div>
       <div class="book-form__form-group">
-        <label for="cover">Image</label>
-        <input id="cover" type="url" v-model="image" />
+        <label for="image">Image</label>
+        <input type="text" id="image" v-model="book.cover" />
       </div>
       <div class="book-form__form-group">
-        <button class="book-form__submit" type="submit">Add book</button>
-      </div>
-      <div v-if="error" class="book-form__error">
-        Error submitting form. Please try again.
+        <button type="submit" class="book-form__submit">Add book</button>
       </div>
     </form>
   </div>
@@ -201,10 +190,5 @@ export default {
 }
 .book-form__submit:hover {
   background-color: #43a047;
-}
-.book-form__error {
-  color: red;
-  font-size: 14px;
-  margin-top: 10px;
 }
 </style>

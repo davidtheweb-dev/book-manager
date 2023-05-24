@@ -29,7 +29,10 @@ export default {
       <div class="book-item__data">
         <p class="book-item__year"><strong>Year: </strong>{{ book.year }}</p>
         <p class="book-item__pages"><strong>Pages: </strong>{{ book.pages }}</p>
-        <p class="book-item__genre"><strong>Genre: </strong>{{ book.genre }}</p>
+        <p class="book-item__genre">
+          <strong>Genre: </strong
+          ><span v-for="genre in book.genre">{{ genre + ' ' }}</span>
+        </p>
         <p class="book-item__editorial">
           <strong>Editorial: </strong>{{ book.editorial }}
         </p>

@@ -3,7 +3,7 @@ export default {
   name: 'SearchBar',
   data() {
     return {
-      searchTerm: '',
+      search: '',
     };
   },
   methods: {
@@ -11,11 +11,12 @@ export default {
       this.$emit('show-form');
     },
     clearSearch() {
-      this.searchTerm = '';
-      this.$emit('search', '');
+      this.search = '';
     },
-    searchBook() {
-      this.$emit('search', this.searchTerm);
+  },
+  watch: {
+    search() {
+      this.$emit('search', this.search);
     },
   },
 };
@@ -23,12 +24,7 @@ export default {
 
 <template>
   <div class="search-bar">
-    <input
-      type="text"
-      placeholder="Search book"
-      @input="searchBook"
-      v-model="searchTerm"
-    />
+    <input type="text" placeholder="Search book" v-model="search" />
     <button type="button" class="clear" @click="clearSearch">Clear</button>
     <button type="button" class="add" @click="showForm">Add book</button>
   </div>

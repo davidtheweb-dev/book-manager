@@ -1,21 +1,21 @@
 <script>
 export default {
   name: 'FilterBar',
-  methods: {
+  data: () => ({
+    sortBy: 'title',
+    orderBy: 'asc',
+    favourite: false,
+  }),
+  watch: {
     sortBy() {
-      const sortSelect = document.getElementById('sort');
-      const sortByValue = sortSelect.options[sortSelect.selectedIndex].value;
-      this.$emit('sort-items', sortByValue);
+      console.log(this.sortBy);
+      this.$emit('sort-items', this.sortBy);
     },
     orderBy() {
-      const orderSelect = document.getElementById('order');
-      const orderByValue = orderSelect.options[orderSelect.selectedIndex].value;
-      this.$emit('order-items', orderByValue);
+      this.$emit('order-items', this.orderBy);
     },
     favourite() {
-      const favouriteCheckbox = document.getElementById('favourites');
-      const favouriteValue = favouriteCheckbox.checked;
-      this.$emit('favourite-items', favouriteValue);
+      this.$emit('favourite-items', this.favourite);
     },
   },
 };
@@ -25,7 +25,7 @@ export default {
   <div class="filter-bar">
     <div class="filter-bar__select">
       <label for="sort">Sort by:</label>
-      <select id="sort" @change="sortBy">
+      <select id="sort" v-model="sortBy">
         <option value="title">Title</option>
         <option value="author">Author</option>
         <option value="year">Year</option>
@@ -42,13 +42,13 @@ export default {
     </div>
     <div class="filter-bar__select">
       <label for="order">Sort by:</label>
-      <select id="order" @change="orderBy">
-        <option value="ascending">Ascending</option>
-        <option value="descending">Descending</option>
+      <select id="order" v-model="orderBy">
+        <option value="asc">Ascending</option>
+        <option value="desc">Descending</option>
       </select>
     </div>
     <div class="filter-bar__check">
-      <input type="checkbox" id="favourites" @change="favourite" />
+      <input type="checkbox" id="favourites" v-model="favourite" />
       <label for="favourites">Favourite</label>
     </div>
   </div>

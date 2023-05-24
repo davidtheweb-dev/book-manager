@@ -1,6 +1,12 @@
 <script>
 export default {
   name: 'ModalLayer',
+  props: {
+    showModal: {
+      type: Boolean,
+      default: false,
+    },
+  },
   methods: {
     closeModal() {
       this.$emit('close-modal');
