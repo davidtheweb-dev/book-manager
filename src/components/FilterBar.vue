@@ -1,24 +1,22 @@
-<script>
-export default {
-  name: 'FilterBar',
-  data: () => ({
-    sortBy: 'title',
-    orderBy: 'asc',
-    favourite: false,
-  }),
-  watch: {
-    sortBy() {
-      console.log(this.sortBy);
-      this.$emit('sort-items', this.sortBy);
-    },
-    orderBy() {
-      this.$emit('order-items', this.orderBy);
-    },
-    favourite() {
-      this.$emit('favourite-items', this.favourite);
-    },
-  },
-};
+<script setup>
+import { ref, defineEmits, watch } from 'vue';
+
+const emit = defineEmits(['sort-items', 'order-items', 'favourite-items']);
+
+const sortBy = ref('title');
+watch(sortBy, () => {
+  emit('sort-items', sortBy);
+});
+
+const orderBy = ref('asc');
+watch(orderBy, () => {
+  emit('order-items', orderBy);
+});
+
+const favourite = ref(false);
+watch(favourite, () => {
+  emit('favourite-items', favourite);
+});
 </script>
 
 <template>

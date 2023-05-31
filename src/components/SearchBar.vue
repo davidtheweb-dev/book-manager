@@ -1,25 +1,19 @@
-<script>
-export default {
-  name: 'SearchBar',
-  data() {
-    return {
-      search: '',
-    };
-  },
-  methods: {
-    showForm() {
-      this.$emit('show-form');
-    },
-    clearSearch() {
-      this.search = '';
-    },
-  },
-  watch: {
-    search() {
-      this.$emit('search', this.search);
-    },
-  },
-};
+<script setup>
+import { ref, defineEmits, watch } from 'vue';
+
+const emit = defineEmits(['show-form', 'search']);
+
+const search = ref('');
+watch(search, () => {
+  emit('search', search);
+});
+function clearSearch() {
+  search.value = '';
+}
+
+function showForm() {
+  emit('show-form');
+}
 </script>
 
 <template>

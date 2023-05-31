@@ -1,18 +1,18 @@
-<script>
-export default {
-  name: 'ModalLayer',
-  props: {
-    showModal: {
-      type: Boolean,
-      default: false,
-    },
+<script setup>
+import { defineProps, defineEmits } from 'vue';
+
+const props = defineProps({
+  showModal: {
+    type: Boolean,
+    default: false,
   },
-  methods: {
-    closeModal() {
-      this.$emit('close-modal');
-    },
-  },
-};
+});
+
+const emit = defineEmits(['close-modal']);
+
+function closeModal() {
+  emit('close-modal');
+}
 </script>
 
 <template>

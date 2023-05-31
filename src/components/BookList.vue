@@ -1,23 +1,19 @@
-<script>
+<script setup>
+import { defineProps, defineEmits } from 'vue';
 import BookItem from './BookItem.vue';
 
-export default {
-  name: 'BookList',
-  components: {
-    BookItem,
+const props = defineProps({
+  books: {
+    type: Array,
+    required: true,
   },
-  props: {
-    books: {
-      type: Array,
-      required: true,
-    },
-  },
-  methods: {
-    deleteBook(id) {
-      this.$emit('delete-book', id);
-    },
-  },
-};
+});
+
+const emit = defineEmits(['delete-book']);
+
+function deleteBook(id) {
+  emit('delete-book', id);
+}
 </script>
 
 <template>

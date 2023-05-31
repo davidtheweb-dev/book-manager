@@ -1,8 +1,7 @@
-<script>
+<!-- <script>
 import { uuid } from 'vue-uuid';
 
 export default {
-  name: 'BookForm',
   data: () => ({
     book: {
       title: '',
@@ -59,6 +58,58 @@ export default {
     },
   },
 };
+</script> -->
+
+<script setup>
+import { uuid } from 'vue-uuid';
+import { reactive, defineEmits } from 'vue';
+
+const emit = defineEmits(['close-modal', 'add-book']);
+
+const book = reactive({
+  title: '',
+  author: '',
+  description: '',
+  year: '',
+  pages: '',
+  genre: '',
+  editorial: '',
+  language: '',
+  isbn: '',
+  price: '',
+  stock: '',
+  favourite: false,
+  rating: '',
+  cover: '',
+});
+
+function resetBook() {
+  book.title = '';
+  book.author = '';
+  book.description = '';
+  book.year = '';
+  book.pages = '';
+  book.genre = '';
+  book.editorial = '';
+  book.language = '';
+  book.isbn = '';
+  book.stock = '';
+  book.favourite = false;
+  book.rating = '';
+  book.cover = '';
+}
+
+function createBook() {
+  if ((book.title === '' || book.author === '', book.description === '')) {
+    alert('Please fill in the title and author fields');
+    return;
+  }
+  book.id = uuid.v4();
+  book.genre = book.genre.split(',');
+  const bookToBeAdded = { ...book };
+  emit('add-book', bookToBeAdded);
+  resetBook();
+}
 </script>
 
 <template>
@@ -124,7 +175,7 @@ export default {
       </div>
       <div class="book-form__form-group">
         <label for="rating">Rating</label>
-        <select id="rating" v-model="book.Rating">
+        <select id="rating" v-model="book.rating">
           <option value="1">1 star</option>
           <option value="2">2 stars</option>
           <option value="3">3 stars</option>
