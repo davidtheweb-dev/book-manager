@@ -1,4 +1,6 @@
 <script>
+import axios from 'axios';
+
 import SearchBar from './components/SearchBar.vue';
 import FilterBar from './components/FilterBar.vue';
 import BookList from './components/BookList.vue';
@@ -21,114 +23,35 @@ export default {
       orderBy: 'asc',
       favourite: false,
       searchTerm: '',
-      bookList: [
-        {
-          id: 1,
-          title: 'The Lord of the Rings',
-          author: 'J.R.R. Tolkien',
-          year: 1954,
-          pages: 1216,
-          cover: 'https://m.media-amazon.com/images/I/71VjmMcE-rL.jpg',
-          genre: ['Fantasy', 'Adventure', 'Epic'],
-          description:
-            "The Lord of the Rings is an epic high fantasy novel written by English author and scholar J. R. R. Tolkien. The story began as a sequel to Tolkien's 1937 fantasy novel The Hobbit, but eventually developed into a much larger work. Written in stages between 1937 and 1949, The Lord of the Rings is one of the best-selling novels ever written, with over 150 million copies sold.",
-          editorial: 'Allen & Unwin',
-          language: 'English',
-          isbn: '978-0-261-10342-6',
-          price: 22.95,
-          stock: 10,
-          favourite: true,
-          rating: 5,
-          personalNote: 'This is my favourite book',
-        },
-        {
-          id: 2,
-          title: "Harry Potter and the Philosopher's Stone",
-          author: 'J.K. Rowling',
-          year: 1997,
-          pages: 223,
-          cover:
-            'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/81m1s4wIPML.jpg',
-          genre: ['Fantasy', 'Adventure', 'Epic'],
-          description:
-            "Harry Potter and the Philosopher's Stone is a fantasy novel written by British author J. K. Rowling. The first novel in the Harry Potter series and Rowling's debut novel, it follows Harry Potter, a young wizard who discovers his magical heritage on his eleventh birthday, when he receives a letter of acceptance to Hogwarts School of Witchcraft and Wizardry. Harry makes close friends and a few enemies during his first year at the school, and with the help of his friends, he faces an attempted comeback by the dark wizard Lord Voldemort, who killed Harry's parents, but failed to kill Harry when he was just 15 months old.",
-          editorial: 'Bloomsbury',
-          language: 'English',
-          isbn: '978-0-7475-3269-9',
-          price: 8.99,
-          stock: 5,
-          favourite: false,
-          rating: 4,
-          personalNote: 'I like this book',
-        },
-        {
-          id: 3,
-          title: 'And Then There Were None',
-          author: 'Agatha Christie',
-          year: 1939,
-          pages: 288,
-          cover:
-            'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/819i8joMtRL.jpg',
-          genre: ['Mystery', 'Thriller', 'Crime'],
-          description: '',
-          editorial: 'Collins Crime Club',
-          language: 'English',
-          isbn: '978-0-00-720189-2',
-          price: 9.99,
-          stock: 3,
-          favourite: false,
-          rating: 3,
-          personalNote: "I don't like this book",
-        },
-        {
-          id: 4,
-          title: 'The Hobbit',
-          author: 'J.R.R. Tolkien',
-          year: 1937,
-          pages: 310,
-          cover:
-            'https://m.media-amazon.com/images/W/IMAGERENDERING_521856-T1/images/I/710+HcoP38L.jpg',
-          genre: ['Fantasy', 'Adventure', 'Epic'],
-          description:
-            "The Hobbit, or There and Back Again is a children's fantasy novel by English author J. R. R. Tolkien. It was published on 21 September 1937 to wide critical acclaim, being nominated for the Carnegie Medal and awarded a prize from the New York Herald Tribune for best juvenile fiction. The book remains popular and is recognized as a classic in children's literature.",
-          editorial: 'Allen & Unwin',
-          language: 'English',
-          isbn: '978-0-261-10342-6',
-          price: 9.99,
-          stock: 2,
-          favourite: true,
-          rating: 5,
-          personalNote: 'This is my favourite book',
-        },
-        {
-          id: 5,
-          title: 'The Lion, the Witch and the Wardrobe',
-          author: 'C.S. Lewis',
-          year: 1950,
-          pages: 208,
-          cover: 'https://m.media-amazon.com/images/I/71VjmMcE-rL.jpg',
-          genre: ['Fantasy', 'Adventure', 'Epic'],
-          description:
-            "The Lion, the Witch and the Wardrobe is a high fantasy novel for children by C. S. Lewis, published by Geoffrey Bles in 1950. It is the first published and best known of seven novels in The Chronicles of Narnia (1950–1956). It is considered a classic of children's literature and is the author's best-known work, having sold over 100 million copies in 47 languages.",
-          editorial: 'Geoffrey Bles',
-          language: 'English',
-          isbn: '978-0-00-720189-2',
-          price: 9.99,
-          stock: 1,
-          favourite: false,
-          rating: 4,
-          personalNote: 'I like this book',
-        },
-      ],
+      bookList: [],
     };
   },
+  mounted() {
+    this.fetchBooks();
+  },
   methods: {
-    addBook(book) {
-      this.bookList = [...this.bookList, book];
-      this.toggleForm();
+    async fetchBooks() {
+      const req = await axios.get('http://localhost:3000/catalog');
+      this.bookList = req.data.recipes;
     },
-    deleteBook(id) {
-      this.bookList = this.bookList.filter((book) => book.id !== id);
+    async addBook(book) {
+      const req = await axios.post('http://localhost:3000/book', book);
+      if (req.status === 200) {
+        await this.fetchBooks();
+        this.toggleForm();
+      }
+    },
+    async deleteBook(id) {
+      const req = await axios({
+        method: 'DELETE',
+        url: `http://localhost:3000/book/`,
+        data: {
+          id: id,
+        },
+      });
+      if (req.status === 200) {
+        this.fetchBooks();
+      }
     },
     toggleForm() {
       this.showModal = !this.showModal;
@@ -181,12 +104,8 @@ export default {
           return (
             book.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
             book.author.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            book.description
-              .toLowerCase()
-              .includes(this.searchTerm.toLowerCase()) ||
-            book.genre.some((item) =>
-              item.toLowerCase().includes(this.searchTerm.toLowerCase())
-            )
+            book.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            book.genre.some((item) => item.toLowerCase().includes(this.searchTerm.toLowerCase()))
           );
         });
       }
@@ -204,11 +123,7 @@ export default {
     </div>
   </header>
   <SearchBar @show-form="toggleForm" @search="setSearchTerm" />
-  <FilterBar
-    @sort-items="sortBooks"
-    @order-items="orderBooks"
-    @favourite-items="favouriteBooks"
-  />
+  <FilterBar @sort-items="sortBooks" @order-items="orderBooks" @favourite-items="favouriteBooks" />
   <main class="main">
     <BookList :books="filteredBooks" @delete-book="deleteBook" />
   </main>
