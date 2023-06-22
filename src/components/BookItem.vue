@@ -1,7 +1,5 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue';
-
-const props = defineProps({
+defineProps({
   book: {
     type: Object,
     required: true,
@@ -30,15 +28,10 @@ function deleteBook(id) {
         <p class="book-item__year"><strong>Year: </strong>{{ book.year }}</p>
         <p class="book-item__pages"><strong>Pages: </strong>{{ book.pages }}</p>
         <p class="book-item__genre">
-          <strong>Genre: </strong
-          ><span v-for="genre in book.genre">{{ genre + ' ' }}</span>
+          <strong>Genre: </strong><span v-for="genre in book.genre">{{ genre + ' ' }}</span>
         </p>
-        <p class="book-item__editorial">
-          <strong>Editorial: </strong>{{ book.editorial }}
-        </p>
-        <p class="book-item__language">
-          <strong>Language: </strong>{{ book.language }}
-        </p>
+        <p class="book-item__editorial"><strong>Editorial: </strong>{{ book.editorial }}</p>
+        <p class="book-item__language"><strong>Language: </strong>{{ book.language }}</p>
         <p class="book-item__isbn"><strong>ISBN: </strong>{{ book.isbn }}</p>
       </div>
     </div>

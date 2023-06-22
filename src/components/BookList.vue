@@ -1,8 +1,7 @@
 <script setup>
-import { defineProps, defineEmits } from 'vue';
 import BookItem from './BookItem.vue';
 
-const props = defineProps({
+defineProps({
   books: {
     type: Array,
     required: true,
@@ -18,12 +17,7 @@ function deleteBook(id) {
 
 <template>
   <div class="book-list">
-    <BookItem
-      v-for="book in books"
-      :key="book.id"
-      :book="book"
-      @delete-book="deleteBook"
-    />
+    <BookItem v-for="book in books" :key="book.id" :book="book" @delete-book="deleteBook" />
   </div>
 </template>
 

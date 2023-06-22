@@ -1,6 +1,6 @@
 <script setup>
 import { uuid } from 'vue-uuid';
-import { reactive, defineEmits } from 'vue';
+import { reactive } from 'vue';
 
 const emit = defineEmits(['close-modal', 'add-book']);
 

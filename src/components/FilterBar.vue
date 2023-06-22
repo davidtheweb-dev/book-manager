@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineEmits, watch } from 'vue';
+import { ref, watch } from 'vue';
 
 const emit = defineEmits(['sort-items', 'order-items', 'favourite-items']);
 
