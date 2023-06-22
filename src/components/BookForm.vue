@@ -55,11 +55,11 @@ function createBook() {
     <form class="book-form__form" @submit.prevent="createBook">
       <div class="book-form__form-group">
         <label for="title">Title</label>
-        <input type="text" id="title" v-model="book.title" />
+        <input id="title" v-model="book.title" type="text" />
       </div>
       <div class="book-form__form-group">
         <label for="author">Author</label>
-        <input type="text" id="author" v-model="book.author" />
+        <input id="author" v-model="book.author" type="text" />
       </div>
       <div class="book-form__form-group">
         <label for="description">Description</label>
@@ -67,19 +67,19 @@ function createBook() {
       </div>
       <div class="book-form__form-group">
         <label for="year">Year</label>
-        <input type="number" id="year" v-model="book.year" />
+        <input id="year" v-model="book.year" type="number" />
       </div>
       <div class="book-form__form-group">
         <label for="pages">Pages</label>
-        <input type="number" id="pages" v-model="book.pages" />
+        <input id="pages" v-model="book.pages" type="number" />
       </div>
       <div class="book-form__form-group">
         <label for="genre">Genre</label>
-        <input type="text" id="genre" v-model="book.genre" />
+        <input id="genre" v-model="book.genre" type="text" />
       </div>
       <div class="book-form__form-group">
         <label for="editorial">Editorial</label>
-        <input type="text" id="editorial" v-model="book.editorial" />
+        <input id="editorial" v-model="book.editorial" type="text" />
       </div>
       <div class="book-form__form-group">
         <label for="language">Language</label>
@@ -97,19 +97,19 @@ function createBook() {
       </div>
       <div class="book-form__form-group">
         <label for="isbn">ISBN</label>
-        <input type="text" id="isbn" v-model="book.isbn" />
+        <input id="isbn" v-model="book.isbn" type="text" />
       </div>
       <div class="book-form__form-group">
         <label for="price">Price</label>
-        <input type="number" id="price" v-model="book.price" />
+        <input id="price" v-model="book.price" type="number" />
       </div>
       <div class="book-form__form-group">
         <label for="stock">Stock</label>
-        <input type="number" id="stock" v-model="book.stock" />
+        <input id="stock" v-model="book.stock" type="number" />
       </div>
       <div class="book-form__form-group">
         <label for="favourite">Favourite</label>
-        <input type="checkbox" id="favourite" v-model="book.favourite" />
+        <input id="favourite" v-model="book.favourite" type="checkbox" />
       </div>
       <div class="book-form__form-group">
         <label for="rating">Rating</label>
@@ -123,7 +123,7 @@ function createBook() {
       </div>
       <div class="book-form__form-group">
         <label for="image">Image</label>
-        <input type="text" id="image" v-model="book.cover" />
+        <input id="image" v-model="book.cover" type="text" />
       </div>
       <div class="book-form__form-group">
         <button type="submit" class="book-form__submit">Add book</button>

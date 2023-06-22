@@ -18,7 +18,7 @@ function showForm() {
 
 <template>
   <div class="search-bar">
-    <input type="text" placeholder="Search book" v-model="search" />
+    <input v-model="search" type="text" placeholder="Search book" />
     <button type="button" class="clear" @click="clearSearch">Clear</button>
     <button type="button" class="add" @click="showForm">Add book</button>
   </div>

@@ -26,6 +26,49 @@ export default {
       bookList: [],
     };
   },
+  computed: {
+    filteredBooks() {
+      let bookList = this.bookList;
+
+      bookList = bookList.sort((a, b) => {
+        if (this.sortBy === 'title') {
+          return a.title.localeCompare(b.title);
+        } else if (this.sortBy === 'author') {
+          return a.author.localeCompare(b.author);
+        } else if (this.sortBy === 'year') {
+          return a.year - b.year;
+        } else if (this.sortBy === 'pages') {
+          return a.pages - b.pages;
+        } else if (this.sortBy === 'price') {
+          return a.price - b.price;
+        } else if (this.sortBy === 'stock') {
+          return a.stock - b.stock;
+        } else if (this.sortBy === 'rating') {
+          return a.rating - b.rating;
+        }
+      });
+      if (this.orderBy === 'desc') {
+        bookList = bookList.reverse();
+      }
+      if (this.favourite) {
+        bookList = this.bookList.filter((book) => book.favourite);
+      }
+
+      if (!this.searchTerm) {
+        return bookList;
+      } else {
+        bookList = this.bookList.filter((book) => {
+          return (
+            book.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            book.author.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            book.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+            book.genre.some((item) => item.toLowerCase().includes(this.searchTerm.toLowerCase()))
+          );
+        });
+      }
+      return bookList;
+    },
+  },
   mounted() {
     this.fetchBooks();
   },
@@ -67,49 +110,6 @@ export default {
     },
     favouriteBooks(favourite) {
       this.favourite = favourite;
-    },
-  },
-  computed: {
-    filteredBooks() {
-      let bookList = this.bookList;
-
-      bookList = this.bookList.sort((a, b) => {
-        if (this.sortBy === 'title') {
-          return a.title.localeCompare(b.title);
-        } else if (this.sortBy === 'author') {
-          return a.author.localeCompare(b.author);
-        } else if (this.sortBy === 'year') {
-          return a.year - b.year;
-        } else if (this.sortBy === 'pages') {
-          return a.pages - b.pages;
-        } else if (this.sortBy === 'price') {
-          return a.price - b.price;
-        } else if (this.sortBy === 'stock') {
-          return a.stock - b.stock;
-        } else if (this.sortBy === 'rating') {
-          return a.rating - b.rating;
-        }
-      });
-      if (this.orderBy === 'desc') {
-        bookList = this.bookList.reverse();
-      }
-      if (this.favourite) {
-        bookList = this.bookList.filter((book) => book.favourite);
-      }
-
-      if (!this.searchTerm) {
-        return bookList;
-      } else {
-        bookList = this.bookList.filter((book) => {
-          return (
-            book.title.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            book.author.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            book.description.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
-            book.genre.some((item) => item.toLowerCase().includes(this.searchTerm.toLowerCase()))
-          );
-        });
-      }
-      return bookList;
     },
   },
 };

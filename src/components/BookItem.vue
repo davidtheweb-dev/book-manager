@@ -28,7 +28,8 @@ function deleteBook(id) {
         <p class="book-item__year"><strong>Year: </strong>{{ book.year }}</p>
         <p class="book-item__pages"><strong>Pages: </strong>{{ book.pages }}</p>
         <p class="book-item__genre">
-          <strong>Genre: </strong><span v-for="genre in book.genre">{{ genre + ' ' }}</span>
+          <strong>Genre: </strong
+          ><span v-for="genre in book.genre" :key="genre">{{ genre + ' ' }}</span>
         </p>
         <p class="book-item__editorial"><strong>Editorial: </strong>{{ book.editorial }}</p>
         <p class="book-item__language"><strong>Language: </strong>{{ book.language }}</p>
@@ -36,7 +37,7 @@ function deleteBook(id) {
       </div>
     </div>
 
-    <p class="book-item__description" v-if="book.description">
+    <p v-if="book.description" class="book-item__description">
       {{ book.description }}
     </p>
 

@@ -46,7 +46,7 @@ watch(favourite, () => {
       </select>
     </div>
     <div class="filter-bar__check">
-      <input type="checkbox" id="favourites" v-model="favourite" />
+      <input id="favourites" v-model="favourite" type="checkbox" />
       <label for="favourites">Favourite</label>
     </div>
   </div>
